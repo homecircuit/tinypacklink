@@ -6,9 +6,9 @@
 feature:
 1. the packet can detect the repeat and loss command message.
 2. send data in serial steam format.
-3. compact message that does not use of json format. if user worry about the pices of volume data. this protocol will suitable to start with your project. 
-4. the format can send over LoRa, MQTT. that do not make several format to decode.
-5. On the packet is flexible to add or adjust message.
+3. the compact message that does not use JSON format. if users worry about the pieces of volume data. this protocol will suitable to start with your project. 
+4. the format can send over LoRa, and MQTT. that do not make several formats to decode.
+5. The packet is flexible to add or adjust messages.
 
 ![image](https://github.com/homecircuit/tinypacklink/assets/132191747/ca83c989-ecab-4ed8-9259-d70a8df7ab18)
 
