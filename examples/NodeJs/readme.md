@@ -15,8 +15,7 @@ constructor(year, month, day, hour, minute, second) {
 const timestamp = new Timestamp(21, 7, 7, 12, 30, 45); // Represents 2000-07-07 12:30:45<br>
 console.log(timestamp);
 
-<strong><h3>packet function</h3></strong></br>
-
+<strong><h3>Encode/Decode Function</h3></strong>
 <pre>function packTimestamp(timestamp) {
   let packedTimestamp = 0;
   packedTimestamp |= timestamp.year << 26;     // 6 bits for year
