@@ -43,3 +43,25 @@ console.log(timestamp);
     byteArray[i] = parseInt(hex, 16);
   }
 }</pre>
+**Test**
+<pre>
+const buff = [[], []];
+let strlen1, strlen2;
+const mesg_str1 = "FFFE03E703E7270F0063018F9B00FFFE0BB7176F07CF03E701F3003100";
+const mesg_str2 = "FFFF03E803E827100064018F9C01FFFF0BB8177007D003E801F4003201";
+strlen1 = mesg_str1.length / 2;
+strlen2 = mesg_str2.length / 2;
+
+console.log("string length[1]: " + strlen1);
+console.log("string length[2]: " + strlen2);
+
+hexStringToByteArray(mesg_str1, buff[0], mesg_str1.length);
+for (let i = 0; i < strlen1; i++) {
+  console.log(" 0x" + buff[0][i].toString(16));
+}
+
+hexStringToByteArray(mesg_str2, buff[1], mesg_str2.length);
+for (let i = 0; i < strlen2; i++) {
+  console.log(" 0x" + buff[1][i].toString(16));
+}    
+</pre>
