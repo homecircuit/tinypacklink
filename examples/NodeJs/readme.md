@@ -27,7 +27,6 @@ console.log(timestamp);
   return packedTimestamp;
 }</pre>
 
-
 <pre>function unpackTimestamp(packedTimestamp, timestamp) {
   timestamp.year = (packedTimestamp >> 26) & 0x3F;      // Extract 6 bits for year
   timestamp.month = (packedTimestamp >> 22) & 0x0F;     // Extract 4 bits for month
@@ -35,4 +34,12 @@ console.log(timestamp);
   timestamp.hour = (packedTimestamp >> 12) & 0x1F;      // Extract 5 bits for hour
   timestamp.minute = (packedTimestamp >> 6) & 0x3F;     // Extract 6 bits for minute
   timestamp.second = packedTimestamp & 0x3F;            // Extract 6 bits for second
+}</pre>
+
+<pre>function hexStringToByteArray(hexString, byteArray, byteArraySize) {
+  const len = hexString.length;
+  for (let i = 0; i < byteArraySize && i * 2 < len; ++i) {
+    const hex = hexString.substr(i * 2, 2);
+    byteArray[i] = parseInt(hex, 16);
+  }
 }</pre>
