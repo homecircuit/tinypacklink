@@ -21,7 +21,9 @@ In a world where efficient and reliable data transmission is paramount, the Tiny
 
 
 <strong><h2><p><center>tinypacklink packet.</center></p></h2></strong>
-![image](https://github.com/homecircuit/tinypacklink/assets/132191747/ea05f88e-2d8e-4f46-8783-503b89eb47c2)
+![image](https://github.com/homecircuit/tinypacklink/assets/132191747/7d710247-82b1-46b8-84a2-4438ff2d23c1)
+
+
 
 ## Concept M2C
 Regarding the cloud design to use the TinyPackLink protocol, you need to set up an MQTT broker or any other cloud service that supports MQTT communication. Here's a general outline of how you can design the cloud infrastructure:
