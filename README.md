@@ -23,6 +23,8 @@ In a world where efficient and reliable data transmission is paramount, the Tiny
 <strong><h2><p><center>tinypacklink packet.</center></p></h2></strong>
 ![image](https://github.com/homecircuit/tinypacklink/assets/132191747/a2a092ba-7123-4b18-94c0-b42e13162fec)
 
+**Example:**
+[unpack protocol on google sheets. ](https://docs.google.com/spreadsheets/d/16mdhMOQ8KWYtslIcMCt3owUwniyEg5naZqhSwRnVwuM/edit#gid=0)
 
 
 ## Concept M2C
