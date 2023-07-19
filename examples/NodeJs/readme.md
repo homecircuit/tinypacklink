@@ -15,18 +15,6 @@
 [Decode Packet]https://github.com/homecircuit/tinypacklink/blob/aa1ab70a41012a0b293857f8b33939da93e7167f/examples/NodeJs/lib/tinypackdecode.js "The best search engine for privacy"
 
 
-<strong><h2><p><center>Timestamp parameter for access Tinypacklink protocol</center></p></h2></strong>
-<pre>classTimestamp{
-constructor(year, month, day, hour, minute, second) {
-    this.year = year;       // 0-99 (representing 2000-2099)
-    this.month = month;     // 1-12
-    this.day = day;         // 1-31
-    this.hour = hour;       // 0-23
-    this.minute = minute;   // 0-59
-    this.second = second;   // 0-59
-  }
-}</pre>
-
 **Example usage:**<br>
 const timestamp = new Timestamp(21, 7, 7, 12, 30, 45); // Represents 2000-07-07 12:30:45<br>
 console.log(timestamp);
