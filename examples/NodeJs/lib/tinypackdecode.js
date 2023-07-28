@@ -5,14 +5,14 @@ const COMPONENT_ID_LAMP = 0x02;
 
 function packTimestamp(year, month, day, hour) {
   // Pack the timestamp components into a 32-bit unsigned integer
-  const packedTimestamp = (year << 24) | (month << 16) | (day << 8) | hour;
+  var packedTimestamp = (year << 24) | (month << 16) | (day << 8) | hour;
   return packedTimestamp;
 }
 
 // Function to convert hexadecimal string to byte array
 function hexStringToByteArray(hexString, byteArraySize) {
-  const len = hexString.length;
-  const byteArray = new Uint8Array(byteArraySize);
+  var len = hexString.length;
+  var byteArray = new Uint8Array(byteArraySize);
   for (let i = 0; i < byteArraySize && i * 2 < len; ++i) {
     const hex = hexString.substr(i * 2, 2);
     byteArray[i] = parseInt(hex, 16);
@@ -52,7 +52,7 @@ var TinyPackLink = {
 };
 
 function decodeTinypacklink(messageArray) {
-  const tinypack = Object.assign({}, TinyPackLink);
+  var tinypack = Object.assign({}, TinyPackLink);
 
   if (messageArray[0] === STX_MSG) { // Verify the start byte
     tinypack.stx = messageArray[0]; // Start of packet byte
@@ -73,7 +73,7 @@ function decodeTinypacklink(messageArray) {
     tinypack.crc16 = (messageArray[crc_position] << 8) | messageArray[crc_position + 1];
 
     // Calculate the CRC16 checksum of the received packet
-    const receivedChecksum = calculateCRC16(messageArray.slice(0, 13 + tinypack.len));
+    var receivedChecksum = calculateCRC16(messageArray.slice(0, 13 + tinypack.len));
     if (receivedChecksum === tinypack.crc16) {
       // Process the valid packet
       // Add your logic here to handle the received packet
