@@ -151,14 +151,21 @@ void connectToMQTT() {
   }
 }
 
-void mqttCallback(char* topic, byte* payload, unsigned int length) {
-  // Handle incoming MQTT messages here
-  // Assuming the received payload contains the TinyPackLink message
-  TinyPackLink message;
-  memcpy(&message, payload, sizeof(message));
-  decodeTinypacklink(message.payload, message.len);
+uint8_t buf[128];
+/* --------- Callback function get data from web ---------- */
+void callback(String topic, byte* payload, unsigned int length) {
+  //DEBUG_PRINT("Message arrived [");
+  DEBUG_PRINT("Message arrived [");
+  DEBUG_PRINT(topic);
+  DEBUG_PRINT("] ");
+  String message;
+  for (int i = 0; i < length; i++) {
+    message = message + (char)payload[i];
+  }
+  DEBUG_PRINTLN(message);
+  sysconfig.byteArraySize =  hexStringToByteArray(message,&buff[0]);
+  decodeTinypacklink(buff,byteArraySize);
 }
-
 
 
 
