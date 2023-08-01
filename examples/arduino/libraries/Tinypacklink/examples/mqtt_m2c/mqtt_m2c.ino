@@ -166,7 +166,6 @@ void callback(String topic, byte* payload, unsigned int length) {
   DEBUG_PRINTLN(message);
   sysconfig.byteArraySize =  hexStringToByteArray(message,&buff[0]);
   decodeTinypacklink(buff,byteArraySize);
-  
 }
 
 void setup() {
