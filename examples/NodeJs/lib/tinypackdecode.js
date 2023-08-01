@@ -68,12 +68,12 @@ function decodeTinypacklink(messageArray) {
       messageArray[11]
     );
     tinypack.componentId = messageArray[12];
-    const crc_position = 12 + tinypack.len + 1;
+    const crc_position = 6 + tinypack.len;
 
     tinypack.crc16 = (messageArray[crc_position] << 8) | messageArray[crc_position + 1];
 
     // Calculate the CRC16 checksum of the received packet
-    var receivedChecksum = calculateCRC16(messageArray.slice(0, 13 + tinypack.len));
+    var receivedChecksum = calculateCRC16(messageArray.slice(0, 6 + tinypack.len));
     if (receivedChecksum === tinypack.crc16) {
       // Process the valid packet
       // Add your logic here to handle the received packet
