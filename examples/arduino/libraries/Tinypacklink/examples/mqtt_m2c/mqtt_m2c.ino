@@ -89,12 +89,12 @@ void decodeTinypacklink(const uint8_t *messageArray, uint8_t messageLength) {
     tinypack.code = messageArray[7];
     tinypack.timestamp = packTimestamp(messageArray[8], messageArray[9], messageArray[10], messageArray[11]);
     tinypack.componentId = messageArray[12];
-    uint8_t crc_position = 12 + tinypack.len + 1;
+    uint8_t crc_position = 6 + tinypack.len;
 
     tinypack.crc16 = (messageArray[crc_position] << 8) | messageArray[crc_position + 1];
 
     // Calculate the CRC16 checksum of the received packet
-    uint16_t receivedChecksum = calculateCRC16(messageArray, 13 + tinypack.len);
+    uint16_t receivedChecksum = calculateCRC16(messageArray, 6 + tinypack.len);
     if (receivedChecksum == tinypack.crc16) {
       // Process the valid packet
       // Add your logic here to handle the received packet
@@ -151,14 +151,23 @@ void connectToMQTT() {
   }
 }
 
-void mqttCallback(char* topic, byte* payload, unsigned int length) {
-  // Handle incoming MQTT messages here
-  // Assuming the received payload contains the TinyPackLink message
-  TinyPackLink message;
-  memcpy(&message, payload, sizeof(message));
-  decodeTinypacklink(message.payload, message.len);
-}
 
+uint8_t buf[128];
+/* --------- Callback function get data from web ---------- */
+void callback(String topic, byte* payload, unsigned int length) {
+  //DEBUG_PRINT("Message arrived [");
+  DEBUG_PRINT("Message arrived [");
+  DEBUG_PRINT(topic);
+  DEBUG_PRINT("] ");
+  String message;
+  for (int i = 0; i < length; i++) {
+    message = message + (char)payload[i];
+  }
+  DEBUG_PRINTLN(message);
+  sysconfig.byteArraySize =  hexStringToByteArray(message,&buff[0]);
+  decodeTinypacklink(buff,byteArraySize);
+  
+}
 
 void setup() {
   Serial.begin(9600);
