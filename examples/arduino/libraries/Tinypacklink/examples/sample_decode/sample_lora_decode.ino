@@ -34,16 +34,22 @@ uint32_t packTimestamp(uint8_t year, uint8_t month, uint8_t day, uint8_t hour) {
 }
 
 // Function to convert hexadecimal string to byte array
-void hexStringToByteArray(const String& hexString, uint8_t* byteArray, uint8_t byteArraySize) {
+size_t hexStringToByteArray(const String& hexString, uint8_t* byteArray) {
     size_t len = hexString.length();
-    for (size_t i = 0; i < byteArraySize && i * 2 < len; ++i) {
+    size_t byteArraySize = len / 2; // Calculate the size of the byte array
+
+    // Process two characters at a time
+    for (size_t i = 0; i < byteArraySize; ++i) {
         char hex[3];
-        hex[0] = hexString[i * 2];
-        hex[1] = hexString[i * 2 + 1];
+        hex[0] = hexString.charAt(i * 2);
+        hex[1] = hexString.charAt(i * 2 + 1);
         hex[2] = '\0';
-        byteArray[i] = strtoul(hex, nullptr, 16);
+        byteArray[i] = strtol(hex, nullptr, 16);
     }
+
+    return byteArraySize;
 }
+
 
 uint16_t calculateCRC16(const uint8_t* data, size_t length) {
   uint16_t crc = 0xFFFF;
@@ -75,12 +81,12 @@ void decodeTinypacklink(const uint8_t *messageArray, uint8_t messageLength) {
     tinypack.code = messageArray[7];
     tinypack.timestamp = packTimestamp(messageArray[8], messageArray[9], messageArray[10], messageArray[11]);
     tinypack.componentId = messageArray[12];
-    uint8_t crc_position = 12 + tinypack.len + 1;
+    uint8_t crc_position = 6 + tinypack.len;
 
     tinypack.crc16 = (messageArray[crc_position] << 8) | messageArray[crc_position + 1];
 
     // Calculate the CRC16 checksum of the received packet
-    uint16_t receivedChecksum = calculateCRC16(messageArray, 13 + tinypack.len);
+    uint16_t receivedChecksum = calculateCRC16(messageArray, 6 + tinypack.len);
     if (receivedChecksum == tinypack.crc16) {
       // Process the valid packet
       // Add your logic here to handle the received packet
@@ -152,25 +158,20 @@ void loop() {
   String ack = "at+recv=2,-98,7,37:55888800011601015de4f1d8026464646405a06405a06405a06405a06405a06405a0648a48";
 
 
-
   // AT command prefix to search for
   const char* at_command_prefix = "at+recv=";
   int16_t command_index = checkATCommand(ack, at_command_prefix);
-  // Serial.println("command_index: " + String(command_index));
 
-  // Serial.println("---------------------------");
-  // for(uint8_t i=0;i<ack.length()/2;i++){
-  //   Serial.println(" ,"+String(buff[command_index+i]));
-  // }
-  // Serial.println("\n---------------------------");
 
   if (command_index != -1) {
     // Print the index of ":" + 1 in the byte array
     String command_data = ack.substring(command_index);
-    hexStringToByteArray(command_data,buff,command_data.length());
+    hexStringToByteArray(command_data,buff);
   
-    // Serial.println("Command Data: " + command_data);
-    decodeTinypacklink(buff, (uint8_t)(command_data.length()/2)); //2char ==> 1byte 
+    uint8_t byteArraySize =  hexStringToByteArray(message,&sysconfig.buff[0]);
+
+  
+    decodeTinypacklink(sysconfig.buff,byteArraySize);
   }
 
   delay(5000);
