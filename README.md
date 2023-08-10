@@ -23,6 +23,18 @@ In a world where efficient and reliable data transmission is paramount, the Tiny
 <strong><h2><p><center>tinypacklink packet.</center></p></h2></strong>
 ![image](https://github.com/homecircuit/tinypacklink/assets/132191747/a2a092ba-7123-4b18-94c0-b42e13162fec)
 
+<strong><h3>Understanding the TinyPackLink Struct:</h3></strong>
+Describe the purpose of each field within the TinyPackLink struct:</br>
+**stx:** Start of packet byte.</br>
+**sourceId** and **destinationId:** Identifiers for the source and destination of the packet.</br>
+**len:** Length of the payload data.</br>
+**messageId:** Unique identifier for different types of messages.</br>
+**code:** Version code for protocol compatibility.</br>
+**timestamp:** Timestamp for synchronization and time-sensitive data.</br>
+**componentId:** Component identification within the communication system.</br>
+**payload:** Actual data being transmitted, up to 35 bytes.</br>
+**crc16:** Checksum for data integrity verification</br>
+
 **Example:**</br>
 [--> unpack protocol on google sheets.](https://docs.google.com/spreadsheets/d/16mdhMOQ8KWYtslIcMCt3owUwniyEg5naZqhSwRnVwuM/edit#gid=0)</br>
 [--> wokwi website](https://wokwi.com/projects/371503108516337665)</br>
@@ -39,13 +51,13 @@ Regarding the cloud design to use the TinyPackLink protocol, you need to set up 
 
 ## Concept M2M
 For M2M (Machine-to-Machine) communication using the TinyPackLink protocol, you can consider the following commands or topics that can be supported:
-1. Status Update: Machines can send periodic status updates to each other, providing information about their current state, availability, and any relevant parameters.
-2. Data Exchange: Machines can exchange data between each other, sharing information such as sensor readings, measurements, or any other relevant data.
-3. Command Execution: Machines can send commands to each other, instructing them to perform specific actions or tasks. For example, one machine can send a command to another machine to start a particular operation.
-4. Collaborative Processing: Machines can collaborate and share processing tasks, dividing a complex task among multiple machines to achieve faster and efficient processing.
-5. Fault Detection and Recovery: Machines can communicate with each other to detect faults or errors and take appropriate actions for recovery or error handling.
-6. Synchronization: Machines can synchronize their actions and behaviors to ensure coordinated operations. For example, multiple machines can synchronize their timings to perform a task simultaneously.
-7. Event Notification: Machines can send event notifications to each other, indicating the occurrence of specific events or triggering certain actions.
+1. **Status Update:** Machines can send periodic status updates to each other, providing information about their current state, availability, and any relevant parameters.
+2. **Data Exchange:** Machines can exchange data between each other, sharing information such as sensor readings, measurements, or any other relevant data.
+3. **Command Execution:** Machines can send commands to each other, instructing them to perform specific actions or tasks. For example, one machine can send a command to another machine to start a particular operation.
+4. **Collaborative Processing:** Machines can collaborate and share processing tasks, dividing a complex task among multiple machines to achieve faster and efficient processing.
+5. **Fault Detection and Recovery:** Machines can communicate with each other to detect faults or errors and take appropriate actions for recovery or error handling.
+6. **Synchronization:** Machines can synchronize their actions and behaviors to ensure coordinated operations. For example, multiple machines can synchronize their timings to perform a task simultaneously.
+7. **Event Notification:** Machines can send event notifications to each other, indicating the occurrence of specific events or triggering certain actions.
 
 
 
